@@ -1,15 +1,15 @@
 {
   "expo": {
     "name": "Mission Udyojak",
-    "slug": "form-project",
+    "slug": "mission-udyojak",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "formproject2",
+    "scheme": "mission-udyojak",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon",
-      "bundleIdentifier": "com.shaggy.borkade.formproject",
+      "bundleIdentifier": "com.mission.udyojak",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -21,7 +21,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.shaggy.borkade.formproject"
+      "package": "com.mission.udyojak"
     },
     "web": {
       "output": "static",
@@ -52,6 +52,6 @@
         "projectId": "a99bab15-0617-43cc-88d3-3f27cd8a2445"
       }
     },
-    "owner": "shaggy.borkade"
+    "owner": "mission.udyojak"
   }
 }
