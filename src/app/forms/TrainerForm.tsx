@@ -18,6 +18,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { colors } from "@/theme/colors";
 import SuccessModal from "../components/FormComponents/SuccessModal";
 
 // ----------------------------------------------------------------------------------
@@ -219,7 +220,7 @@ const TrainerForm = () => {
 
   return (
     <LinearGradient
-      colors={["#1b0c06", "#3e1607", "#8d340e", "#b84714"]}
+      colors={[colors.navy, colors.navyRaised, colors.blue, colors.blueDeep]}
       locations={[0, 0.35, 0.75, 1.0]}
       style={style.container}
     >
@@ -245,7 +246,7 @@ const TrainerForm = () => {
               onPress={() => router.back()}
               activeOpacity={0.8}
             >
-              <Ionicons name="chevron-back" size={20} color="#FFFFFF" />
+              <Ionicons name="chevron-back" size={20} color={colors.white} />
             </TouchableOpacity>
             <Text style={style.orgTitle}>MISSION UDYOJAK FOUNDATION</Text>
             <Text style={style.title}>Trainer Application Form</Text>
@@ -266,7 +267,7 @@ const TrainerForm = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 placeholder="Enter full name"
-                placeholderTextColor="#a8998d"
+                placeholderTextColor={colors.placeholder}
               />
             )}
           />
@@ -283,7 +284,7 @@ const TrainerForm = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 placeholder="Enter father's / spouse name"
-                placeholderTextColor="#a8998d"
+                placeholderTextColor={colors.placeholder}
               />
             )}
           />
@@ -355,7 +356,7 @@ const TrainerForm = () => {
                 onChangeText={(text) => onChange(text.replace(/[^0-9]/g, ""))}
                 onBlur={onBlur}
                 placeholder="Enter mobile number"
-                placeholderTextColor="#a8998d"
+                placeholderTextColor={colors.placeholder}
                 keyboardType="phone-pad"
                 maxLength={10}
               />
@@ -380,7 +381,7 @@ const TrainerForm = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 placeholder="Enter email address"
-                placeholderTextColor="#a8998d"
+                placeholderTextColor={colors.placeholder}
                 keyboardType="email-address"
                 autoCapitalize="none"
               />
@@ -402,7 +403,7 @@ const TrainerForm = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 placeholder="Enter residential address"
-                placeholderTextColor="#a8998d"
+                placeholderTextColor={colors.placeholder}
                 multiline
                 numberOfLines={3}
               />
@@ -422,7 +423,7 @@ const TrainerForm = () => {
                     onChangeText={onChange}
                     onBlur={onBlur}
                     placeholder="City"
-                    placeholderTextColor="#a8998d"
+                    placeholderTextColor={colors.placeholder}
                   />
                 )}
               />
@@ -439,7 +440,7 @@ const TrainerForm = () => {
                     onChangeText={onChange}
                     onBlur={onBlur}
                     placeholder="State"
-                    placeholderTextColor="#a8998d"
+                    placeholderTextColor={colors.placeholder}
                   />
                 )}
               />
@@ -463,7 +464,7 @@ const TrainerForm = () => {
                 onChangeText={(text) => onChange(text.replace(/[^0-9]/g, ""))}
                 onBlur={onBlur}
                 placeholder="Enter PIN code"
-                placeholderTextColor="#a8998d"
+                placeholderTextColor={colors.placeholder}
                 keyboardType="number-pad"
                 maxLength={6}
               />
@@ -485,7 +486,7 @@ const TrainerForm = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 placeholder="Enter education"
-                placeholderTextColor="#a8998d"
+                placeholderTextColor={colors.placeholder}
               />
             )}
           />
@@ -501,7 +502,7 @@ const TrainerForm = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 placeholder="Enter occupation"
-                placeholderTextColor="#a8998d"
+                placeholderTextColor={colors.placeholder}
               />
             )}
           />
@@ -517,7 +518,7 @@ const TrainerForm = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 placeholder="Enter business name"
-                placeholderTextColor="#a8998d"
+                placeholderTextColor={colors.placeholder}
               />
             )}
           />
@@ -547,7 +548,7 @@ const TrainerForm = () => {
                 onChangeText={(text) => onChange(text.replace(/[^0-9]/g, ""))}
                 onBlur={onBlur}
                 placeholder="Enter approx annual income"
-                placeholderTextColor="#a8998d"
+                placeholderTextColor={colors.placeholder}
                 keyboardType="numeric"
               />
             )}
@@ -565,7 +566,7 @@ const TrainerForm = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 placeholder="Share your reason"
-                placeholderTextColor="#a8998d"
+                placeholderTextColor={colors.placeholder}
                 multiline
                 numberOfLines={4}
               />
@@ -584,7 +585,7 @@ const TrainerForm = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 placeholder="List your skills / interests"
-                placeholderTextColor="#a8998d"
+                placeholderTextColor={colors.placeholder}
                 multiline
                 numberOfLines={3}
               />
@@ -600,7 +601,7 @@ const TrainerForm = () => {
             disabled={isSubmitting}
           >
             {isSubmitting ? (
-              <ActivityIndicator color="#1a0e08" />
+              <ActivityIndicator color={colors.ink} />
             ) : (
               <Text style={style.submitButtonText}>Submit Application</Text>
             )}
@@ -639,7 +640,7 @@ const style = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "rgba(255, 255, 255, 0.12)",
+    backgroundColor: colors.glassStrong,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 16,
@@ -647,65 +648,65 @@ const style = StyleSheet.create({
   orgTitle: {
     fontSize: 14,
     fontWeight: "800",
-    color: "#ef833b",
+    color: colors.gold,
     marginBottom: 2,
     letterSpacing: 1.5,
   },
   title: {
     fontSize: 26,
     fontWeight: "800",
-    color: "#FFFFFF",
+    color: colors.white,
     marginBottom: 4,
   },
   sectionHeaderWrapper: {
     marginTop: 24,
     marginBottom: 12,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(249, 115, 22, 0.35)",
+    borderBottomColor: colors.accentBorder,
     paddingBottom: 6,
   },
   sectionHeaderText: {
     fontSize: 17,
     fontWeight: "700",
-    color: "#f97316",
+    color: colors.primary,
   },
   fieldLabel: {
     fontSize: 14,
     fontWeight: "600",
-    color: "#e2d5cd",
+    color: colors.textOnDarkMuted,
     marginTop: 12,
     marginBottom: 6,
   },
   errorText: {
     fontSize: 12,
-    color: "#f87171",
+    color: colors.error,
     marginTop: 4,
   },
   input: {
-    backgroundColor: "rgba(255, 255, 255, 0.08)",
+    backgroundColor: colors.glass,
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.15)",
+    borderColor: colors.glassBorder,
     borderRadius: 12,
     paddingHorizontal: 14,
     paddingVertical: 12,
     fontSize: 15,
-    color: "#FFFFFF",
+    color: colors.white,
   },
   dateInput: {
-    backgroundColor: "rgba(255, 255, 255, 0.08)",
+    backgroundColor: colors.glass,
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.15)",
+    borderColor: colors.glassBorder,
     borderRadius: 12,
     paddingHorizontal: 14,
     paddingVertical: 12,
   },
   dateText: {
     fontSize: 15,
-    color: "#FFFFFF",
+    color: colors.white,
   },
   placeholder: {
     fontSize: 15,
-    color: "#a8998d",
+    color: colors.placeholder,
   },
   textArea: {
     minHeight: 85,
@@ -737,31 +738,31 @@ const style = StyleSheet.create({
     height: 20,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: "#f97316",
+    borderColor: colors.primary,
     alignItems: "center",
     justifyContent: "center",
     marginRight: 8,
   },
   radioCircleSelected: {
-    borderColor: "#f97316",
+    borderColor: colors.primary,
   },
   radioInnerDot: {
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: "#f97316",
+    backgroundColor: colors.primary,
   },
   radioLabel: {
     fontSize: 14,
-    color: "#FFFFFF",
+    color: colors.white,
   },
   submitButton: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.orange,
     borderRadius: 30,
     paddingVertical: 16,
     alignItems: "center",
     marginTop: 28,
-    shadowColor: "#000000",
+    shadowColor: colors.black,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
     shadowRadius: 8,
@@ -771,7 +772,7 @@ const style = StyleSheet.create({
     opacity: 0.6,
   },
   submitButtonText: {
-    color: "#1a0e08",
+    color: colors.white,
     fontSize: 17,
     fontWeight: "bold",
   },

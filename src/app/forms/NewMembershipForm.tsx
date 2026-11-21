@@ -18,6 +18,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { colors } from "@/theme/colors";
 import SectionHeader from "../components/FormComponents/SectionHeader";
 import SuccessModal from "../components/FormComponents/SuccessModal";
 
@@ -262,7 +263,7 @@ const NewMembershipForm = () => {
 
   return (
     <LinearGradient
-      colors={["#1b0c06", "#3e1607", "#8d340e", "#b84714"]}
+      colors={[colors.navy, colors.navyRaised, colors.blue, colors.blueDeep]}
       locations={[0, 0.35, 0.75, 1.0]}
       style={style.container}
     >
@@ -288,585 +289,586 @@ const NewMembershipForm = () => {
               onPress={() => router.back()}
               activeOpacity={0.8}
             >
-              <Ionicons name="chevron-back" size={20} color="#FFFFFF" />
+              <Ionicons name="chevron-back" size={20} color={colors.white} />
             </TouchableOpacity>
+            <Text style={style.orgTitle}>MISSION UDYOJAK FOUNDATION</Text>
             <Text style={style.title}>Membership Application Form</Text>
           </View>
 
-        {/* 1. Personal Details */}
-        <SectionHeader title="1. Personal Details" />
+          {/* 1. Personal Details */}
+          <SectionHeader title="1. Personal Details" />
 
-        <FieldLabel label="Full Name" />
-        <Controller
-          control={control}
-          name="fullName"
-          rules={{ required: "Full name is required" }}
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={style.input}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Enter full name"
-              placeholderTextColor="#B0A69A"
-            />
-          )}
-        />
-        <ErrorText message={errors.fullName?.message} />
-
-        <FieldLabel label="Father's / Spouse Name" />
-        <Controller
-          control={control}
-          name="fatherSpouseName"
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={style.input}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Enter father's / spouse name"
-              placeholderTextColor="#B0A69A"
-            />
-          )}
-        />
-
-        <FieldLabel label="Date of Birth" />
-        <Pressable
-          style={style.dateInput}
-          onPress={() => setShowDobPicker(true)}
-        >
-          <Text style={dob ? style.dateText : style.placeholder}>
-            {dob ? dob.toLocaleDateString("en-GB") : "Select Date of Birth"}
-          </Text>
-        </Pressable>
-
-        {showDobPicker && (
+          <FieldLabel label="Full Name" />
           <Controller
             control={control}
-            name="dob"
-            render={({ field: { value, onChange } }) => (
-              <DateTimePicker
+            name="fullName"
+            rules={{ required: "Full name is required" }}
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={style.input}
                 value={value}
-                mode="date"
-                display={Platform.OS === "ios" ? "spinner" : "default"}
-                maximumDate={new Date()}
-                onChange={(event, selectedDate) => {
-                  setShowDobPicker(Platform.OS === "ios");
-                  if (event.type === "set" && selectedDate) {
-                    onChange(selectedDate);
-                  }
-                  if (Platform.OS !== "ios") {
-                    setShowDobPicker(false);
-                  }
-                }}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Enter full name"
+                placeholderTextColor={colors.placeholder}
               />
             )}
           />
-        )}
+          <ErrorText message={errors.fullName?.message} />
 
-        <FieldLabel label="Gender" />
-        <Controller
-          control={control}
-          name="gender"
-          rules={{ required: "Please select a gender" }}
-          render={({ field: { value, onChange } }) => (
-            <RadioGroupField
-              options={GENDER_OPTIONS}
-              value={value}
-              onChange={onChange}
-            />
-          )}
-        />
-        <ErrorText message={errors.gender?.message as string | undefined} />
+          <FieldLabel label="Father's / Spouse Name" />
+          <Controller
+            control={control}
+            name="fatherSpouseName"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={style.input}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Enter father's / spouse name"
+                placeholderTextColor={colors.placeholder}
+              />
+            )}
+          />
 
-        <FieldLabel label="Mobile Number" />
-        <Controller
-          control={control}
-          name="mobileNumber"
-          rules={{
-            required: "Mobile number is required",
-            pattern: {
-              value: /^[0-9]{10}$/,
-              message: "Enter a valid 10-digit mobile number",
-            },
-          }}
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={style.input}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Enter mobile number"
-              placeholderTextColor="#B0A69A"
-              keyboardType="phone-pad"
-              maxLength={10}
-            />
-          )}
-        />
-        <ErrorText message={errors.mobileNumber?.message} />
+          <FieldLabel label="Date of Birth" />
+          <Pressable
+            style={style.dateInput}
+            onPress={() => setShowDobPicker(true)}
+          >
+            <Text style={dob ? style.dateText : style.placeholder}>
+              {dob ? dob.toLocaleDateString("en-GB") : "Select Date of Birth"}
+            </Text>
+          </Pressable>
 
-        <FieldLabel label="Email ID" />
-        <Controller
-          control={control}
-          name="email"
-          rules={{
-            pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: "Enter a valid email address",
-            },
-          }}
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={style.input}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Enter email address"
-              placeholderTextColor="#B0A69A"
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
-          )}
-        />
-        <ErrorText message={errors.email?.message} />
-
-        {/* 2. Address Details */}
-        <SectionHeader title="2. Address Details" />
-
-        <FieldLabel label="Residential Address" />
-        <Controller
-          control={control}
-          name="residentialAddress"
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={[style.input, style.textArea]}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Enter residential address"
-              placeholderTextColor="#B0A69A"
-              multiline
-              numberOfLines={3}
-            />
-          )}
-        />
-
-        <View style={style.row}>
-          <View style={style.rowItem}>
-            <FieldLabel label="City" />
+          {showDobPicker && (
             <Controller
               control={control}
-              name="city"
-              render={({ field: { value, onChange, onBlur } }) => (
-                <TextInput
-                  style={style.input}
+              name="dob"
+              render={({ field: { value, onChange } }) => (
+                <DateTimePicker
                   value={value}
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  placeholder="City"
-                  placeholderTextColor="#B0A69A"
+                  mode="date"
+                  display={Platform.OS === "ios" ? "spinner" : "default"}
+                  maximumDate={new Date()}
+                  onChange={(event, selectedDate) => {
+                    setShowDobPicker(Platform.OS === "ios");
+                    if (event.type === "set" && selectedDate) {
+                      onChange(selectedDate);
+                    }
+                    if (Platform.OS !== "ios") {
+                      setShowDobPicker(false);
+                    }
+                  }}
                 />
               )}
             />
+          )}
+
+          <FieldLabel label="Gender" />
+          <Controller
+            control={control}
+            name="gender"
+            rules={{ required: "Please select a gender" }}
+            render={({ field: { value, onChange } }) => (
+              <RadioGroupField
+                options={GENDER_OPTIONS}
+                value={value}
+                onChange={onChange}
+              />
+            )}
+          />
+          <ErrorText message={errors.gender?.message as string | undefined} />
+
+          <FieldLabel label="Mobile Number" />
+          <Controller
+            control={control}
+            name="mobileNumber"
+            rules={{
+              required: "Mobile number is required",
+              pattern: {
+                value: /^[0-9]{10}$/,
+                message: "Enter a valid 10-digit mobile number",
+              },
+            }}
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={style.input}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Enter mobile number"
+                placeholderTextColor={colors.placeholder}
+                keyboardType="phone-pad"
+                maxLength={10}
+              />
+            )}
+          />
+          <ErrorText message={errors.mobileNumber?.message} />
+
+          <FieldLabel label="Email ID" />
+          <Controller
+            control={control}
+            name="email"
+            rules={{
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Enter a valid email address",
+              },
+            }}
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={style.input}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Enter email address"
+                placeholderTextColor={colors.placeholder}
+                keyboardType="email-address"
+                autoCapitalize="none"
+              />
+            )}
+          />
+          <ErrorText message={errors.email?.message} />
+
+          {/* 2. Address Details */}
+          <SectionHeader title="2. Address Details" />
+
+          <FieldLabel label="Residential Address" />
+          <Controller
+            control={control}
+            name="residentialAddress"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={[style.input, style.textArea]}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Enter residential address"
+                placeholderTextColor={colors.placeholder}
+                multiline
+                numberOfLines={3}
+              />
+            )}
+          />
+
+          <View style={style.row}>
+            <View style={style.rowItem}>
+              <FieldLabel label="City" />
+              <Controller
+                control={control}
+                name="city"
+                render={({ field: { value, onChange, onBlur } }) => (
+                  <TextInput
+                    style={style.input}
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    placeholder="City"
+                    placeholderTextColor={colors.placeholder}
+                  />
+                )}
+              />
+            </View>
+            <View style={style.rowItem}>
+              <FieldLabel label="State" />
+              <Controller
+                control={control}
+                name="state"
+                render={({ field: { value, onChange, onBlur } }) => (
+                  <TextInput
+                    style={style.input}
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    placeholder="State"
+                    placeholderTextColor={colors.placeholder}
+                  />
+                )}
+              />
+            </View>
           </View>
-          <View style={style.rowItem}>
-            <FieldLabel label="State" />
+
+          <FieldLabel label="PIN Code" />
+          <Controller
+            control={control}
+            name="pinCode"
+            rules={{
+              pattern: {
+                value: /^[0-9]{6}$/,
+                message: "Enter a valid 6-digit PIN code",
+              },
+            }}
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={style.input}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Enter PIN code"
+                placeholderTextColor={colors.placeholder}
+                keyboardType="number-pad"
+                maxLength={6}
+              />
+            )}
+          />
+          <ErrorText message={errors.pinCode?.message} />
+
+          {/* 3. Professional Details */}
+          <SectionHeader title="3. Professional Details" />
+
+          <FieldLabel label="Education" />
+          <Controller
+            control={control}
+            name="education"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={style.input}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Enter education"
+                placeholderTextColor={colors.placeholder}
+              />
+            )}
+          />
+
+          <FieldLabel label="Occupation" />
+          <Controller
+            control={control}
+            name="occupation"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={style.input}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Enter occupation"
+                placeholderTextColor={colors.placeholder}
+              />
+            )}
+          />
+
+          <FieldLabel label="Business Name (if any)" />
+          <Controller
+            control={control}
+            name="businessName"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={style.input}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Enter business name"
+                placeholderTextColor={colors.placeholder}
+              />
+            )}
+          />
+
+          <FieldLabel label="Type" />
+          <Controller
+            control={control}
+            name="professionType"
+            render={({ field: { value, onChange } }) => (
+              <RadioGroupField
+                options={PROFESSION_TYPE_OPTIONS}
+                value={value}
+                onChange={onChange}
+              />
+            )}
+          />
+
+          <FieldLabel label="Annual Income (Approx)" />
+          <Controller
+            control={control}
+            name="annualIncome"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={style.input}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Enter approx annual income"
+                placeholderTextColor={colors.placeholder}
+                keyboardType="numeric"
+              />
+            )}
+          />
+
+          {/* 4. Membership Type */}
+          <SectionHeader title="4. Membership Type" />
+          <Controller
+            control={control}
+            name="membershipType"
+            rules={{ required: "Please select a membership type" }}
+            render={({ field: { value, onChange } }) => (
+              <RadioGroupField
+                options={MEMBERSHIP_TYPE_OPTIONS}
+                value={value}
+                onChange={onChange}
+              />
+            )}
+          />
+          <ErrorText
+            message={errors.membershipType?.message as string | undefined}
+          />
+
+          {/* 5. Reason to join */}
+          <SectionHeader title="5. Why do you want to join Mission Udyojak Foundation?" />
+          <Controller
+            control={control}
+            name="reasonToJoin"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={[style.input, style.textArea]}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Share your reason"
+                placeholderTextColor={colors.placeholder}
+                multiline
+                numberOfLines={4}
+              />
+            )}
+          />
+
+          {/* 6. Skills / Interests */}
+          <SectionHeader title="6. Skills / Interests" />
+          <Controller
+            control={control}
+            name="skillsInterests"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={[style.input, style.textArea]}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="List your skills / interests"
+                placeholderTextColor={colors.placeholder}
+                multiline
+                numberOfLines={3}
+              />
+            )}
+          />
+
+          {/* 7. Reference */}
+          <SectionHeader title="7. Reference (if any)" />
+
+          <FieldLabel label="Name" />
+          <Controller
+            control={control}
+            name="referenceName"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={style.input}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Enter reference name"
+                placeholderTextColor={colors.placeholder}
+              />
+            )}
+          />
+
+          <FieldLabel label="Contact" />
+          <Controller
+            control={control}
+            name="referenceContact"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={style.input}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Enter reference contact"
+                placeholderTextColor={colors.placeholder}
+                keyboardType="phone-pad"
+              />
+            )}
+          />
+
+          {/* 8. Membership Fee Details */}
+          <SectionHeader title="8. Membership Fee Details" />
+
+          <FieldLabel label="Amount Paid (₹)" />
+          <Controller
+            control={control}
+            name="amountPaid"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={style.input}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Enter amount paid"
+                placeholderTextColor={colors.placeholder}
+                keyboardType="numeric"
+              />
+            )}
+          />
+
+          <FieldLabel label="Payment Mode" />
+          <Controller
+            control={control}
+            name="paymentMode"
+            render={({ field: { value, onChange } }) => (
+              <RadioGroupField
+                options={PAYMENT_MODE_OPTIONS}
+                value={value}
+                onChange={onChange}
+              />
+            )}
+          />
+
+          <FieldLabel label="Transaction ID" />
+          <Controller
+            control={control}
+            name="transactionId"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={style.input}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Enter transaction ID"
+                placeholderTextColor={colors.placeholder}
+              />
+            )}
+          />
+
+          <FieldLabel label="Payment Date" />
+          <Pressable
+            style={style.dateInput}
+            onPress={() => setShowPaymentDatePicker(true)}
+          >
+            <Text style={paymentDate ? style.dateText : style.placeholder}>
+              {paymentDate
+                ? paymentDate.toLocaleDateString("en-GB")
+                : "Select Payment Date"}
+            </Text>
+          </Pressable>
+
+          {showPaymentDatePicker && (
             <Controller
               control={control}
-              name="state"
-              render={({ field: { value, onChange, onBlur } }) => (
-                <TextInput
-                  style={style.input}
+              name="paymentDate"
+              render={({ field: { value, onChange } }) => (
+                <DateTimePicker
                   value={value}
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  placeholder="State"
-                  placeholderTextColor="#B0A69A"
+                  mode="date"
+                  display={Platform.OS === "ios" ? "spinner" : "default"}
+                  maximumDate={new Date()}
+                  onChange={(event, selectedDate) => {
+                    setShowPaymentDatePicker(Platform.OS === "ios");
+                    if (event.type === "set" && selectedDate) {
+                      onChange(selectedDate);
+                    }
+                    if (Platform.OS !== "ios") {
+                      setShowPaymentDatePicker(false);
+                    }
+                  }}
                 />
               )}
             />
-          </View>
-        </View>
-
-        <FieldLabel label="PIN Code" />
-        <Controller
-          control={control}
-          name="pinCode"
-          rules={{
-            pattern: {
-              value: /^[0-9]{6}$/,
-              message: "Enter a valid 6-digit PIN code",
-            },
-          }}
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={style.input}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Enter PIN code"
-              placeholderTextColor="#B0A69A"
-              keyboardType="number-pad"
-              maxLength={6}
-            />
           )}
-        />
-        <ErrorText message={errors.pinCode?.message} />
 
-        {/* 3. Professional Details */}
-        <SectionHeader title="3. Professional Details" />
-
-        <FieldLabel label="Education" />
-        <Controller
-          control={control}
-          name="education"
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={style.input}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Enter education"
-              placeholderTextColor="#B0A69A"
-            />
-          )}
-        />
-
-        <FieldLabel label="Occupation" />
-        <Controller
-          control={control}
-          name="occupation"
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={style.input}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Enter occupation"
-              placeholderTextColor="#B0A69A"
-            />
-          )}
-        />
-
-        <FieldLabel label="Business Name (if any)" />
-        <Controller
-          control={control}
-          name="businessName"
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={style.input}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Enter business name"
-              placeholderTextColor="#B0A69A"
-            />
-          )}
-        />
-
-        <FieldLabel label="Type" />
-        <Controller
-          control={control}
-          name="professionType"
-          render={({ field: { value, onChange } }) => (
-            <RadioGroupField
-              options={PROFESSION_TYPE_OPTIONS}
-              value={value}
-              onChange={onChange}
-            />
-          )}
-        />
-
-        <FieldLabel label="Annual Income (Approx)" />
-        <Controller
-          control={control}
-          name="annualIncome"
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={style.input}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Enter approx annual income"
-              placeholderTextColor="#B0A69A"
-              keyboardType="numeric"
-            />
-          )}
-        />
-
-        {/* 4. Membership Type */}
-        <SectionHeader title="4. Membership Type" />
-        <Controller
-          control={control}
-          name="membershipType"
-          rules={{ required: "Please select a membership type" }}
-          render={({ field: { value, onChange } }) => (
-            <RadioGroupField
-              options={MEMBERSHIP_TYPE_OPTIONS}
-              value={value}
-              onChange={onChange}
-            />
-          )}
-        />
-        <ErrorText
-          message={errors.membershipType?.message as string | undefined}
-        />
-
-        {/* 5. Reason to join */}
-        <SectionHeader title="5. Why do you want to join Mission Udyojak Foundation?" />
-        <Controller
-          control={control}
-          name="reasonToJoin"
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={[style.input, style.textArea]}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Share your reason"
-              placeholderTextColor="#B0A69A"
-              multiline
-              numberOfLines={4}
-            />
-          )}
-        />
-
-        {/* 6. Skills / Interests */}
-        <SectionHeader title="6. Skills / Interests" />
-        <Controller
-          control={control}
-          name="skillsInterests"
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={[style.input, style.textArea]}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="List your skills / interests"
-              placeholderTextColor="#B0A69A"
-              multiline
-              numberOfLines={3}
-            />
-          )}
-        />
-
-        {/* 7. Reference */}
-        <SectionHeader title="7. Reference (if any)" />
-
-        <FieldLabel label="Name" />
-        <Controller
-          control={control}
-          name="referenceName"
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={style.input}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Enter reference name"
-              placeholderTextColor="#B0A69A"
-            />
-          )}
-        />
-
-        <FieldLabel label="Contact" />
-        <Controller
-          control={control}
-          name="referenceContact"
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={style.input}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Enter reference contact"
-              placeholderTextColor="#B0A69A"
-              keyboardType="phone-pad"
-            />
-          )}
-        />
-
-        {/* 8. Membership Fee Details */}
-        <SectionHeader title="8. Membership Fee Details" />
-
-        <FieldLabel label="Amount Paid (₹)" />
-        <Controller
-          control={control}
-          name="amountPaid"
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={style.input}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Enter amount paid"
-              placeholderTextColor="#B0A69A"
-              keyboardType="numeric"
-            />
-          )}
-        />
-
-        <FieldLabel label="Payment Mode" />
-        <Controller
-          control={control}
-          name="paymentMode"
-          render={({ field: { value, onChange } }) => (
-            <RadioGroupField
-              options={PAYMENT_MODE_OPTIONS}
-              value={value}
-              onChange={onChange}
-            />
-          )}
-        />
-
-        <FieldLabel label="Transaction ID" />
-        <Controller
-          control={control}
-          name="transactionId"
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={style.input}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Enter transaction ID"
-              placeholderTextColor="#B0A69A"
-            />
-          )}
-        />
-
-        <FieldLabel label="Payment Date" />
-        <Pressable
-          style={style.dateInput}
-          onPress={() => setShowPaymentDatePicker(true)}
-        >
-          <Text style={paymentDate ? style.dateText : style.placeholder}>
-            {paymentDate
-              ? paymentDate.toLocaleDateString("en-GB")
-              : "Select Payment Date"}
+          {/* 9. Declaration */}
+          <SectionHeader title="9. Declaration" />
+          <Text style={style.declarationText}>
+            I hereby declare that the information provided is true and correct.
+            I agree to follow the rules and regulations of Mission Udyojak
+            Foundation.
           </Text>
-        </Pressable>
 
-        {showPaymentDatePicker && (
           <Controller
             control={control}
-            name="paymentDate"
+            name="agreedToDeclaration"
+            rules={{ required: true }}
             render={({ field: { value, onChange } }) => (
-              <DateTimePicker
+              <Pressable
+                style={style.checkboxRow}
+                onPress={() => onChange(!value)}
+              >
+                <View style={[style.checkbox, value && style.checkboxChecked]}>
+                  {value && <Text style={style.checkmark}>✓</Text>}
+                </View>
+                <Text style={style.checkboxLabel}>
+                  I agree to the declaration
+                </Text>
+              </Pressable>
+            )}
+          />
+          {errors.agreedToDeclaration && (
+            <ErrorText message="You must accept the declaration to proceed" />
+          )}
+
+          <FieldLabel label="Signature (type full name)" />
+          <Controller
+            control={control}
+            name="signature"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <TextInput
+                style={style.input}
                 value={value}
-                mode="date"
-                display={Platform.OS === "ios" ? "spinner" : "default"}
-                maximumDate={new Date()}
-                onChange={(event, selectedDate) => {
-                  setShowPaymentDatePicker(Platform.OS === "ios");
-                  if (event.type === "set" && selectedDate) {
-                    onChange(selectedDate);
-                  }
-                  if (Platform.OS !== "ios") {
-                    setShowPaymentDatePicker(false);
-                  }
-                }}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Enter signature"
+                placeholderTextColor={colors.placeholder}
               />
             )}
           />
-        )}
 
-        {/* 9. Declaration */}
-        <SectionHeader title="9. Declaration" />
-        <Text style={style.declarationText}>
-          I hereby declare that the information provided is true and correct. I
-          agree to follow the rules and regulations of Mission Udyojak
-          Foundation.
-        </Text>
+          <FieldLabel label="Date" />
+          <Pressable
+            style={style.dateInput}
+            onPress={() => setShowDeclarationPicker(true)}
+          >
+            <Text style={declarationDate ? style.dateText : style.placeholder}>
+              {declarationDate
+                ? declarationDate.toLocaleDateString("en-GB")
+                : "Select Declaration Date"}
+            </Text>
+          </Pressable>
 
-        <Controller
-          control={control}
-          name="agreedToDeclaration"
-          rules={{ required: true }}
-          render={({ field: { value, onChange } }) => (
-            <Pressable
-              style={style.checkboxRow}
-              onPress={() => onChange(!value)}
-            >
-              <View style={[style.checkbox, value && style.checkboxChecked]}>
-                {value && <Text style={style.checkmark}>✓</Text>}
-              </View>
-              <Text style={style.checkboxLabel}>
-                I agree to the declaration
-              </Text>
-            </Pressable>
-          )}
-        />
-        {errors.agreedToDeclaration && (
-          <ErrorText message="You must accept the declaration to proceed" />
-        )}
-
-        <FieldLabel label="Signature (type full name)" />
-        <Controller
-          control={control}
-          name="signature"
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              style={style.input}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder="Enter signature"
-              placeholderTextColor="#B0A69A"
+          {showDeclarationPicker && (
+            <Controller
+              control={control}
+              name="declarationDate"
+              render={({ field: { value, onChange } }) => (
+                <DateTimePicker
+                  value={value}
+                  mode="date"
+                  display={Platform.OS === "ios" ? "spinner" : "default"}
+                  maximumDate={new Date()}
+                  onChange={(event, selectedDate) => {
+                    setShowDeclarationPicker(Platform.OS === "ios");
+                    if (event.type === "set" && selectedDate) {
+                      onChange(selectedDate);
+                    }
+                    if (Platform.OS !== "ios") {
+                      setShowDeclarationPicker(false);
+                    }
+                  }}
+                />
+              )}
             />
           )}
-        />
 
-        <FieldLabel label="Date" />
-        <Pressable
-          style={style.dateInput}
-          onPress={() => setShowDeclarationPicker(true)}
-        >
-          <Text style={declarationDate ? style.dateText : style.placeholder}>
-            {declarationDate
-              ? declarationDate.toLocaleDateString("en-GB")
-              : "Select Declaration Date"}
-          </Text>
-        </Pressable>
-
-        {showDeclarationPicker && (
-          <Controller
-            control={control}
-            name="declarationDate"
-            render={({ field: { value, onChange } }) => (
-              <DateTimePicker
-                value={value}
-                mode="date"
-                display={Platform.OS === "ios" ? "spinner" : "default"}
-                maximumDate={new Date()}
-                onChange={(event, selectedDate) => {
-                  setShowDeclarationPicker(Platform.OS === "ios");
-                  if (event.type === "set" && selectedDate) {
-                    onChange(selectedDate);
-                  }
-                  if (Platform.OS !== "ios") {
-                    setShowDeclarationPicker(false);
-                  }
-                }}
-              />
+          <Pressable
+            style={[
+              style.submitButton,
+              isSubmitting && style.submitButtonDisabled,
+            ]}
+            onPress={handleSubmit(onSubmit)}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <ActivityIndicator color={colors.ink} />
+            ) : (
+              <Text style={style.submitButtonText}>Submit Application</Text>
             )}
-          />
-        )}
-
-        <Pressable
-          style={[
-            style.submitButton,
-            isSubmitting && style.submitButtonDisabled,
-          ]}
-          onPress={handleSubmit(onSubmit)}
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? (
-            <ActivityIndicator color="#1a0e08" />
-          ) : (
-            <Text style={style.submitButtonText}>Submit Application</Text>
-          )}
-        </Pressable>
+          </Pressable>
         </ScrollView>
       </SafeAreaView>
     </LinearGradient>
@@ -889,6 +891,13 @@ const style = StyleSheet.create({
   scrollContent: {
     flex: 1,
   },
+  orgTitle: {
+    fontSize: 14,
+    fontWeight: "800",
+    color: colors.gold,
+    marginBottom: 2,
+    letterSpacing: 1.5,
+  },
   scrollContentContainer: {
     paddingHorizontal: 20,
     paddingTop: 12,
@@ -901,7 +910,7 @@ const style = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "rgba(255, 255, 255, 0.12)",
+    backgroundColor: colors.glassStrong,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 16,
@@ -909,46 +918,46 @@ const style = StyleSheet.create({
   title: {
     fontSize: 26,
     fontWeight: "800",
-    color: "#FFFFFF",
+    color: colors.white,
     marginBottom: 4,
   },
   fieldLabel: {
     fontSize: 14,
     fontWeight: "600",
-    color: "#e2d5cd",
+    color: colors.textOnDarkMuted,
     marginTop: 12,
     marginBottom: 6,
   },
   errorText: {
     fontSize: 12,
-    color: "#f87171",
+    color: colors.error,
     marginTop: 4,
   },
   input: {
-    backgroundColor: "rgba(255, 255, 255, 0.08)",
+    backgroundColor: colors.glass,
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.15)",
+    borderColor: colors.glassBorder,
     borderRadius: 12,
     paddingHorizontal: 14,
     paddingVertical: 12,
     fontSize: 15,
-    color: "#FFFFFF",
+    color: colors.white,
   },
   dateInput: {
-    backgroundColor: "rgba(255, 255, 255, 0.08)",
+    backgroundColor: colors.glass,
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.15)",
+    borderColor: colors.glassBorder,
     borderRadius: 12,
     paddingHorizontal: 14,
     paddingVertical: 12,
   },
   dateText: {
     fontSize: 15,
-    color: "#FFFFFF",
+    color: colors.white,
   },
   placeholder: {
     fontSize: 15,
-    color: "#a8998d",
+    color: colors.placeholder,
   },
   textArea: {
     minHeight: 85,
@@ -977,27 +986,27 @@ const style = StyleSheet.create({
     height: 20,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: "#f97316",
+    borderColor: colors.primary,
     alignItems: "center",
     justifyContent: "center",
     marginRight: 8,
   },
   radioCircleSelected: {
-    borderColor: "#f97316",
+    borderColor: colors.primary,
   },
   radioInnerDot: {
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: "#f97316",
+    backgroundColor: colors.primary,
   },
   radioLabel: {
     fontSize: 14,
-    color: "#FFFFFF",
+    color: colors.white,
   },
   declarationText: {
     fontSize: 14,
-    color: "#d6c8be",
+    color: colors.textOnDarkMuted,
     lineHeight: 20,
     marginBottom: 14,
   },
@@ -1011,31 +1020,31 @@ const style = StyleSheet.create({
     height: 20,
     borderRadius: 5,
     borderWidth: 2,
-    borderColor: "#f97316",
+    borderColor: colors.primary,
     alignItems: "center",
     justifyContent: "center",
     marginRight: 10,
   },
   checkboxChecked: {
-    backgroundColor: "#f97316",
-    borderColor: "#f97316",
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
   },
   checkmark: {
-    color: "#FFFFFF",
+    color: colors.white,
     fontSize: 13,
     fontWeight: "700",
   },
   checkboxLabel: {
     fontSize: 14,
-    color: "#FFFFFF",
+    color: colors.white,
   },
   submitButton: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.orange,
     borderRadius: 30,
     paddingVertical: 16,
     alignItems: "center",
     marginTop: 28,
-    shadowColor: "#000000",
+    shadowColor: colors.black,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
     shadowRadius: 8,
@@ -1045,9 +1054,8 @@ const style = StyleSheet.create({
     opacity: 0.6,
   },
   submitButtonText: {
-    color: "#1a0e08",
+    color: colors.white,
     fontSize: 17,
     fontWeight: "bold",
   },
 });
-

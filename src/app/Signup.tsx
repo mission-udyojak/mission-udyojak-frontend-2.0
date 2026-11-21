@@ -9,6 +9,7 @@ import {
     View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { colors } from "@/theme/colors";
 
 export default function Signup() {
   const [fullName, setFullName] = useState("");
@@ -47,7 +48,7 @@ export default function Signup() {
         <TextInput
           style={styles.input}
           placeholder="Full Name"
-          placeholderTextColor="#9A3412"
+          placeholderTextColor={colors.primaryDark}
           value={fullName}
           onChangeText={setFullName}
         />
@@ -55,7 +56,7 @@ export default function Signup() {
         <TextInput
           style={styles.input}
           placeholder="Email Address"
-          placeholderTextColor="#9A3412"
+          placeholderTextColor={colors.primaryDark}
           keyboardType="email-address"
           autoCapitalize="none"
           value={email}
@@ -65,7 +66,7 @@ export default function Signup() {
         <TextInput
           style={styles.input}
           placeholder="Phone Number"
-          placeholderTextColor="#9A3412"
+          placeholderTextColor={colors.primaryDark}
           keyboardType="phone-pad"
           value={phone}
           onChangeText={setPhone}
@@ -74,7 +75,7 @@ export default function Signup() {
         <TextInput
           style={styles.input}
           placeholder="Password"
-          placeholderTextColor="#9A3412"
+          placeholderTextColor={colors.primaryDark}
           secureTextEntry
           value={password}
           onChangeText={setPassword}
@@ -83,7 +84,7 @@ export default function Signup() {
         <TextInput
           style={styles.input}
           placeholder="Confirm Password"
-          placeholderTextColor="#9A3412"
+          placeholderTextColor={colors.primaryDark}
           secureTextEntry
           value={confirmPassword}
           onChangeText={setConfirmPassword}
@@ -107,14 +108,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "#FFF7ED",
+    backgroundColor: colors.surfaceSoft,
     paddingHorizontal: 20,
   },
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.white,
     padding: 24,
     borderRadius: 16,
-    shadowColor: "#431407",
+    shadowColor: colors.ink,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -126,28 +127,28 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "700",
-    color: "#431407",
+    color: colors.ink,
     textAlign: "center",
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
-    color: "#9A3412",
+    color: colors.primaryDark,
     textAlign: "center",
     marginBottom: 24,
   },
   input: {
     height: 50,
     borderWidth: 1,
-    borderColor: "#FED7AA",
+    borderColor: colors.border,
     borderRadius: 10,
     paddingHorizontal: 15,
     marginBottom: 15,
-    backgroundColor: "#FFFAF5",
-    color: "#431407",
+    backgroundColor: colors.surface,
+    color: colors.ink,
   },
   button: {
-    backgroundColor: "#F97316",
+    backgroundColor: colors.primary,
     height: 50,
     borderRadius: 10,
     justifyContent: "center",
@@ -155,17 +156,17 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   buttonText: {
-    color: "#FFF",
+    color: colors.white,
     fontSize: 16,
     fontWeight: "600",
   },
   loginText: {
     marginTop: 20,
     textAlign: "center",
-    color: "#9A3412",
+    color: colors.primaryDark,
   },
   loginLink: {
-    color: "#F97316",
+    color: colors.primary,
     fontWeight: "600",
   },
 });

@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
+import { colors } from "@/theme/colors";
 
 const SectionHeader = ({ title }: { title: string }) => {
   return (
@@ -15,13 +16,13 @@ const style = StyleSheet.create({
     marginTop: 24,
     marginBottom: 12,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(249, 115, 22, 0.35)",
+    borderBottomColor: colors.accentBorder,
     paddingBottom: 6,
   },
   sectionHeaderText: {
     fontSize: 17,
     fontWeight: "700",
-    color: "#f97316",
+    color: colors.primary,
   },
 });
 

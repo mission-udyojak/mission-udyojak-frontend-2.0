@@ -8,7 +8,7 @@
     "scheme": "mission-udyojak",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon",
+      "icon": "./assets/images/icon.png",
       "bundleIdentifier": "com.mission.udyojak",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
@@ -17,8 +17,7 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#1b0c06",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "foregroundImage": "./assets/images/android-icon-foreground.png"
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.mission.udyojak"

@@ -10,6 +10,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { colors } from "@/theme/colors";
 import FormCards from "./components/FormCards";
 
 export default function Forms() {
@@ -53,7 +54,7 @@ export default function Forms() {
 
   return (
     <LinearGradient
-      colors={["#1b0c06", "#3e1607", "#8d340e", "#b84714"]}
+      colors={[colors.navy, colors.navyRaised, colors.blue, colors.blueDeep]}
       locations={[0, 0.35, 0.75, 1.0]}
       style={styles.container}
     >
@@ -71,7 +72,7 @@ export default function Forms() {
             onPress={() => router.back()}
             activeOpacity={0.8}
           >
-            <Ionicons name="chevron-back" size={20} color="#FFFFFF" />
+            <Ionicons name="chevron-back" size={20} color={colors.white} />
           </TouchableOpacity>
 
           {/* Page Title & Subtitle */}
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "rgba(255, 255, 255, 0.12)",
+    backgroundColor: colors.glassStrong,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,
@@ -149,26 +150,26 @@ const styles = StyleSheet.create({
   pageTitle: {
     fontSize: 28,
     fontWeight: "800",
-    color: "#FFFFFF",
+    color: colors.white,
   },
   headerEmoji: {
     fontSize: 26,
   },
   pageSubtitle: {
     fontSize: 15,
-    color: "#e2d5cd",
+    color: colors.textOnDarkMuted,
     marginTop: 4,
   },
   cardsContainer: {
     marginBottom: 18,
   },
   aboutCard: {
-    backgroundColor: "rgba(50, 28, 20, 0.65)",
+    backgroundColor: colors.cardOverlay,
     borderRadius: 22,
     padding: 20,
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.08)",
-    shadowColor: "#000000",
+    borderColor: colors.glass,
+    shadowColor: colors.black,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
     shadowRadius: 8,
@@ -177,12 +178,12 @@ const styles = StyleSheet.create({
   aboutTitle: {
     fontSize: 18,
     fontWeight: "700",
-    color: "#FFFFFF",
+    color: colors.white,
     marginBottom: 10,
   },
   aboutText: {
     fontSize: 14,
-    color: "#d6c8be",
+    color: colors.textOnDarkMuted,
     lineHeight: 21,
   },
 });

@@ -1,6 +1,7 @@
 import { router } from "expo-router";
 import React from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { colors } from "@/theme/colors";
 
 type SuccessModalProps = {
   visible: boolean;
@@ -50,7 +51,7 @@ export default function SuccessModal({
 const styles = StyleSheet.create({
   backdrop: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.65)",
+    backgroundColor: colors.modalBackdrop,
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 24,
@@ -58,12 +59,12 @@ const styles = StyleSheet.create({
   modalCard: {
     width: "100%",
     maxWidth: 340,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.white,
     borderRadius: 24,
     paddingVertical: 28,
     paddingHorizontal: 24,
     alignItems: "center",
-    shadowColor: "#000000",
+    shadowColor: colors.black,
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.25,
     shadowRadius: 20,
@@ -76,27 +77,27 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontWeight: "800",
-    color: "#1a0e08",
+    color: colors.ink,
     marginBottom: 8,
     textAlign: "center",
   },
   message: {
     fontSize: 14,
-    color: "#57534e",
+    color: colors.textMuted,
     textAlign: "center",
     lineHeight: 20,
     marginBottom: 24,
   },
   button: {
     width: "100%",
-    backgroundColor: "#d94e07",
+    backgroundColor: colors.primary,
     paddingVertical: 14,
     borderRadius: 14,
     alignItems: "center",
     justifyContent: "center",
   },
   buttonText: {
-    color: "#FFFFFF",
+    color: colors.white,
     fontSize: 16,
     fontWeight: "bold",
   },

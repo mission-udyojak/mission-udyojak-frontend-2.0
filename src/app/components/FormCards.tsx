@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { colors } from "@/theme/colors";
 
 type FormCardProps = {
   title: string;
@@ -31,9 +32,9 @@ export default function FormCards({
         {emoji ? (
           <Text style={styles.emojiText}>{emoji}</Text>
         ) : iconName ? (
-          <Ionicons name={iconName} size={22} color="#e5a16d" />
+          <Ionicons name={iconName} size={22} color={colors.gold} />
         ) : (
-          <Ionicons name="document-text-outline" size={22} color="#e5a16d" />
+          <Ionicons name="document-text-outline" size={22} color={colors.gold} />
         )}
       </View>
 
@@ -42,7 +43,7 @@ export default function FormCards({
         <Text style={styles.subtitle}>{subtitle}</Text>
       </View>
 
-      <Ionicons name="chevron-forward" size={18} color="#cbbbb0" />
+      <Ionicons name="chevron-forward" size={18} color={colors.textOnDarkMuted} />
     </TouchableOpacity>
   );
 }
@@ -50,7 +51,7 @@ export default function FormCards({
 const styles = StyleSheet.create({
   card: {
     width: "100%",
-    backgroundColor: "rgba(56, 32, 23, 0.72)",
+    backgroundColor: colors.cardOverlay,
     borderRadius: 20,
     paddingVertical: 14,
     paddingHorizontal: 16,
@@ -58,8 +59,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.07)",
-    shadowColor: "#000000",
+    borderColor: colors.glass,
+    shadowColor: colors.black,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
     shadowRadius: 8,
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 14,
-    backgroundColor: "rgba(255, 255, 255, 0.08)",
+    backgroundColor: colors.glass,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -82,11 +83,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 17,
     fontWeight: "700",
-    color: "#FFFFFF",
+    color: colors.white,
   },
   subtitle: {
     fontSize: 13,
-    color: "#cbbbb0",
+    color: colors.textOnDarkMuted,
     marginTop: 3,
     lineHeight: 18,
   },
